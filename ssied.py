@@ -21,4 +21,6 @@ def GetTrainAndTestAndSubmission():
     store_id_relation = pd.read_csv("store_id_relation.csv", names=['Hpg store id', 'Air store id']);
     print(store_id_relation) # id restauracji, id rezerwacji
 
-    results = pd.DataFrame()
+    result = pd.DataFrame()
+
+GetTrainAndTestAndSubmission()
