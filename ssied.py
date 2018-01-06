@@ -161,3 +161,5 @@ submission = pd.DataFrame({'id': testids,
                            'visitors': np.clip(y_pred, 1, 100)})
 
 submission.to_csv('submission.csv', index = True)
+
+print('Completed!')
