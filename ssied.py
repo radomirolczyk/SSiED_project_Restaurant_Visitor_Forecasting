@@ -90,9 +90,9 @@ test = pd.merge(data['tes'], data['hol'], how='left', on=['visit_date'])
 
 # utworzenie właściwych zbiorów
 train = pd.merge(data['tra'], stores, how='left', on=['air_store_id', 'dow'])
-pd.DataFrame(train).to_csv("old_train.csv", index = True)
+pd.DataFrame(train).to_csv("old_train.csv", index = False)
 test = pd.merge(data['tes'], stores, how='left', on=['air_store_id', 'dow'])
-pd.DataFrame(test).to_csv("old_test.csv", index = True)
+pd.DataFrame(test).to_csv("old_test.csv", index = False)
 
 # kolumna docelowa 'visitors'
 target = train.visitors.values
@@ -144,7 +144,7 @@ print('Start training...')
 # max_depth - maksymalna głębokość drzewa (domyślnie None)
 # min_samples_leaf - minimalna liczba wymagana do liścia (domyślnie 1)
 # n_jobs - ile wątków (jeżeli -1 to liczba rdzeni)
-extraTreesClasiifier = ExtraTreesClassifier(n_estimators = 15, max_features = 5, criterion = 'entropy', min_samples_split = 2,
+extraTreesClasiifier = ExtraTreesClassifier(n_estimators = 20, max_features = 5, criterion = 'entropy', min_samples_split = 2,
                                             max_depth = 10, min_samples_leaf = 1, n_jobs = 1)
 # dopasowanie drzewa
 extraTreesClasiifier.fit(train, target)
@@ -160,6 +160,6 @@ y_pred = extraTreesClasiifier.predict(test)
 submission = pd.DataFrame({'id': testids,
                            'visitors': np.clip(y_pred, 1, 100)})
 
-submission.to_csv('submission.csv', index = True)
+submission.to_csv('submission.csv', index = False)
 
 print('Completed!')
