@@ -76,12 +76,13 @@ tmp = data['tra'].groupby(['air_store_id', 'dow'], as_index=False)[
     'visitors'].count().rename(columns={'visitors': 'count_observations'}) # zliczenie
 stores = pd.merge(stores, tmp, how='left', on=['air_store_id', 'dow'])
 
-# testowo
+# testowo (dane resturacji)
 stores = pd.merge(stores, data['as'], how='left', on=['air_store_id'])
 lbl = preprocessing.LabelEncoder()
 stores['air_genre_name'] = lbl.fit_transform(stores['air_genre_name'])
 stores['air_area_name'] = lbl.fit_transform(stores['air_area_name'])
 
+# wakacje
 data['hol']['visit_date'] = pd.to_datetime(data['hol']['visit_date'])
 data['hol']['day_of_week'] = lbl.fit_transform(data['hol']['day_of_week'])
 data['hol']['visit_date'] = data['hol']['visit_date'].dt.date
